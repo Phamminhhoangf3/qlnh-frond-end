@@ -1,10 +1,8 @@
-import { Button } from 'antd';
-import React from 'react';
+import React from "react";
+import { redirect } from "react-router-dom";
 
-const Home: React.FC = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
-);
+const Home = () => {
+  return <>home 1</>;
+};
 
 export default Home;

@@ -3,12 +3,18 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages";
+import User from "./pages/user";
+import Home from "./pages/home";
+import BaseLayout from "./Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/user",
+    element: <User />,
   },
 ]);
 const root = ReactDOM.createRoot(
@@ -16,7 +22,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BaseLayout>
+      <RouterProvider router={router} />
+    </BaseLayout>
   </React.StrictMode>
 );
 
