@@ -1,10 +1,15 @@
-import { Button } from 'antd';
-import React from 'react';
+import { Button } from "antd";
+import React from "react";
+import Home from "./pages";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const App: React.FC = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
-);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+]);
+
+const App: React.FC = () => <RouterProvider router={router} />;
 
 export default App;
