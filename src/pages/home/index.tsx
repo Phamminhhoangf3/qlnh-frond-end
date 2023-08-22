@@ -1,8 +1,7 @@
-import React from "react";
-import { redirect } from "react-router-dom";
+import BaseLayout from "../../Layout";
 
 const Home = () => {
-  return <>home 1</>;
+  return <BaseLayout>home 1</BaseLayout>;
 };
 
 export default Home;

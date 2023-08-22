@@ -22,9 +22,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BaseLayout>
       <RouterProvider router={router} />
-    </BaseLayout>
   </React.StrictMode>
 );
 

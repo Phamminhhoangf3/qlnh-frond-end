@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { DesktopOutlined, PieChartOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, Space, theme } from "antd";
+import { useLocation } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -22,11 +23,14 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Trang chủ", "1", <PieChartOutlined />),
-  getItem("Tài khoản", "2", <DesktopOutlined />),
+  getItem(<a href="/">Trang chủ</a>, "/", <PieChartOutlined />),
+  getItem(<a href="/user">Tài khoản</a>, "/user", <DesktopOutlined />),
 ];
 
-const BaseLayout = ({ children }: any) => {
+const BaseLayout = ({ children, title, textButton, onClickBtn }: any) => {
+  const { pathname } = useLocation();
+  console.log("pathname", pathname);
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -37,20 +41,24 @@ const BaseLayout = ({ children }: any) => {
       <Sider
         collapsible
         collapsed={collapsed}
-        onCollapse={(value) => {
-          setCollapsed(value);
-        }}
+        onCollapse={(value) => setCollapsed(value)}
       >
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["/"]}
+          selectedKeys={[pathname]}
           mode="inline"
           items={items}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header style={{ background: "#fff" }}>
+          <Space style={{ width: "100%", justifyContent: "space-between" }}>
+            <div>{title}</div>
+            <Button onClick={onClickBtn} type='primary'>{textButton}</Button>
+          </Space>
+        </Header>
         <Content style={{ margin: "0 16px" }}>
           <div
             style={{
