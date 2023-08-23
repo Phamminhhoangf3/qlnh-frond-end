@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Table, Typography } from "antd";
+import { Button, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import BaseLayout from "../../Layout";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 interface DataType {
   key: string;
@@ -12,33 +12,45 @@ interface DataType {
   tags: string[];
 }
 
-const columns: ColumnsType<DataType> = [
-  {
-    title: "Name",
-    dataIndex: "userName",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "role",
-    dataIndex: "roleUser.name",
-    key: "role",
-  },
-  {
-    title: "Description",
-    dataIndex: "description",
-    key: "Description",
-  },
-  {
-    title: "created",
-    dataIndex: "created",
-    key: "created",
-  },
-];
-
 const User: React.FC = () => {
   const [data, setData] = useState();
   const navigate = useNavigate();
+  const columns: ColumnsType<DataType> = [
+    {
+      title: "Name",
+      dataIndex: "userName",
+      key: "name",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "role",
+      dataIndex: "roleUser.name",
+      key: "role",
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "Description",
+    },
+    {
+      title: "created",
+      dataIndex: "created",
+      key: "created",
+    },
+    {
+      title: "action",
+      render: (e) => {
+        return (
+          <Space>
+            <Button danger>xóa</Button>
+            <Button onClick={() => navigate(`/create-account?id=${e?.id}`)}>
+              sửa
+            </Button>
+          </Space>
+        );
+      },
+    },
+  ];
 
   const getData = async () => {
     try {
@@ -61,7 +73,11 @@ const User: React.FC = () => {
   }, []);
 
   return (
-    <BaseLayout title="Tài khoản" textButton="Tạo tài khoản" onClickBtn={() => navigate('/create-account')}>
+    <BaseLayout
+      title="Tài khoản"
+      textButton="Tạo tài khoản"
+      onClickBtn={() => navigate("/create-account")}
+    >
       <Table columns={columns} dataSource={data} />
     </BaseLayout>
   );

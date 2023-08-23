@@ -29,7 +29,6 @@ const items: MenuItem[] = [
 
 const BaseLayout = ({ children, title, textButton, onClickBtn }: any) => {
   const { pathname } = useLocation();
-  console.log("pathname", pathname);
 
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -56,7 +55,11 @@ const BaseLayout = ({ children, title, textButton, onClickBtn }: any) => {
         <Header style={{ background: "#fff" }}>
           <Space style={{ width: "100%", justifyContent: "space-between" }}>
             <div>{title}</div>
-            <Button onClick={onClickBtn} type='primary'>{textButton}</Button>
+            {textButton ? (
+              <Button onClick={onClickBtn} type="primary">
+                {textButton}
+              </Button>
+            ) : null}
           </Space>
         </Header>
         <Content style={{ margin: "0 16px" }}>
